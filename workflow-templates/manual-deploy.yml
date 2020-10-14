@@ -1,0 +1,23 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      environment:
+        description: 'Environment to deploy to (E.g. shl)'
+        # Default value if no value is explicitly provided
+        default: 'shl'
+        # Input has to be provided for the workflow to run
+        required: true
+      branch:
+        description: 'Branch to deploy'
+        default: 'master'
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy
+      run: echo "Deploying ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }}"
