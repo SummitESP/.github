@@ -1,5 +1,5 @@
 {
     "name": "Manual Deploy",
     "description": "Trigger manual deploy",
-    "iconName": "deploy-rocket",
+    "iconName": "deploy-rocket"
 }
