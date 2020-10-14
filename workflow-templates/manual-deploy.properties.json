@@ -2,6 +2,10 @@
     "name": "Manual Deploy",
     "description": "Trigger manual deploy",
     "iconName": "deploy-rocket",
+    "categories": [
+        "Python",
+        "Deployment"
+    ],
     "filePatterns": [
         "script/deploy",
     ]
