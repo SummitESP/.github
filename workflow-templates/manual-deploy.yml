@@ -16,8 +16,8 @@ on:
         required: false
 
 jobs:
-  deploy:
+  manual-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: deploy
+    - name: Manual Deploy
       run: echo "Deploying ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }}"
