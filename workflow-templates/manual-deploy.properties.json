@@ -5,8 +5,5 @@
     "categories": [
         "Python",
         "Deployment"
-    ],
-    "filePatterns": [
-        "script/deploy",
     ]
 }
