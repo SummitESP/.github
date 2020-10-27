@@ -1,0 +1,35 @@
+name: "Deploy Summit PR"
+
+on:
+  issue_comment:
+	types: [created]
+
+jobs:
+  deploy:
+	runs-on: ubuntu-latest
+	steps:
+	  - name: Checkout github-action-deploy-summit-pr
+		uses: actions/checkout@v2
+		with:
+		  repository: SummitESP/github-action-deploy-summit-pr
+		  ref: v1.0.0
+		  token: ${{ secrets.GH_ACTIONS_ROBOT_TOKEN }}
+		  path: .github/actions/github-action-deploy-summit-pr
+
+	  - name: Deploy the pull request via StackStorm
+		id: deploy_summit_pr
+		uses: ./.github/actions/github-action-deploy-summit-pr
+		with:
+		  access_token: ${{ secrets.GH_ACTIONS_ROBOT_TOKEN }}
+		  st2_api_key: ${{ secrets.STACKSTORM_API_KEY }}
+
+	  - name: Create deploy output artifact
+		if: always()
+		run: echo "${{ steps.deploy_summit_pr.outputs.deploy_output }}" > ~/deploy_output.txt
+
+	  - name: Upload deploy output artifact
+		if: always()
+		uses: actions/upload-artifact@v2
+		with:
+		  name: deploy-output
+		  path: ~/deploy_output.txt

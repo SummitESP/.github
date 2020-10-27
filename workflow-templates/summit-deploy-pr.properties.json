@@ -1,0 +1,8 @@
+{
+    "name": "Deploy Summit PR",
+    "description": "GitHub action that listens for a comment trigger and deploys a PR via StackStorm",
+    "iconName": "deploy-rocket",
+    "categories": [
+        "Python", "Deployment"
+    ]
+}
