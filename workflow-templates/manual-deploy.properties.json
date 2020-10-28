@@ -3,6 +3,6 @@
     "description": "Trigger manual deploy via StackStorm",
     "iconName": "deploy-rocket",
     "categories": [
-        "Python", "Deployment", "Automation"
+        "Deployment", "Automation", "Python"
     ]
 }
