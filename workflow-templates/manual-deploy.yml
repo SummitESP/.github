@@ -16,6 +16,9 @@ jobs:
   manual-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Deployment Info
+        run: echo "Attempting to deploy ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }}"
+
       - name: Checkout github-action-summit-manual-deploy
         uses: actions/checkout@v2
         with:

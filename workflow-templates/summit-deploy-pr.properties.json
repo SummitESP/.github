@@ -3,6 +3,6 @@
     "description": "GitHub action that listens for a comment trigger and deploys a PR via StackStorm",
     "iconName": "deploy-rocket",
     "categories": [
-        "Python", "Deployment"
+        "Python", "Deployment", "Automation"
     ]
 }
