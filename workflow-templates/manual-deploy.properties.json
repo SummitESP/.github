@@ -1,5 +1,8 @@
 {
     "name": "Manual Deploy",
-    "description": "Trigger manual deploy",
-    "iconName": "deploy-rocket"
+    "description": "Trigger manual deploy via StackStorm",
+    "iconName": "deploy-rocket",
+    "categories": [
+        "Python", "Deployment"
+    ]
 }

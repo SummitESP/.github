@@ -2,13 +2,10 @@ name: Manual Deploy
 
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
       environment:
-        description: 'Environment to deploy to (E.g. shl)'
-        # Default value if no value is explicitly provided
+        description: 'Environment to deploy to (e.g. shl)'
         default: 'shl'
-        # Input has to be provided for the workflow to run
         required: true
       branch:
         description: 'Branch to deploy'
@@ -19,5 +16,30 @@ jobs:
   manual-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Manual Deploy
-      run: echo "Deploying ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }}"
+      - name: Checkout github-action-summit-manual-deploy
+        uses: actions/checkout@v2
+        with:
+          repository: SummitESP/github-action-summit-manual-deploy
+          ref: v1.0.0
+          token: ${{ secrets.GH_ACTIONS_ROBOT_TOKEN }}
+          path: .github/actions/github-action-summit-manual-deploy
+
+      - name: Perform deploy
+        id: stackstorm_deploy
+        uses: ./.github/actions/github-action-summit-manual-deploy
+        with:
+          deploy_environment: ${{ github.event.inputs.environment }}
+          branch: ${{ github.event.inputs.branch }}
+          access_token: ${{ secrets.GH_ACTIONS_ROBOT_TOKEN }}
+          st2_api_key: ${{ secrets.STACKSTORM_API_KEY }}
+
+      - name: Create deploy output artifact
+        if: always()
+        run: echo "${{ steps.stackstorm_deploy.outputs.deploy_output }}" > ~/deploy_output.txt
+
+      - name: Upload deploy output artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: deploy-output
+          path: ~/deploy_output.txt
